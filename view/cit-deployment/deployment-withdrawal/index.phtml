@@ -1,0 +1,224 @@
+
+<?php
+    echo $this->partial('/partials/menu');
+?>
+<?php
+$title = 'Retraits';
+$this->headTitle($title);
+?>
+<h3><?php echo $this->translate($title); ?></h3>
+ <!--     <p><?php echo $this->translate('Order number').': '.$order->identifier ?></p> -->
+<?php
+	$form = $this->form;
+	$form->setAttribute('action', $this->url('deploymentWithdrawal/index', array('id' => $deployment->id)));
+	$form->prepare();
+	echo $this->form()->openTag($form);
+?>
+<table class="table">
+	<tr class="<?php echo $this->cycle(array("even", "odd"))->next();?>">
+		<td colspan="13">
+			<a href="<?php echo $this->url('deployment');?>"><?php echo $this->translate('Return to deployments') ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			</td>
+	</tr>
+	<tr class="<?php echo $this->cycle(array("even", "odd"))->next();?>">
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		
+		<td align="center"><strong><a href="<?php echo $this->url('deploymentWithdrawal/index', array('id' => $deployment->id)) ?>
+											?major=caption
+											<?php if ($major == 'caption' && $dir =='ASC') echo '&dir=DESC'; else echo '&dir=ASC' ?>">
+			<?php echo $this->translate('Caption');?></strong></td>
+		<td align="center"><strong><a href="<?php echo $this->url('deploymentWithdrawal/index', array('id' => $deployment->id)) ?>
+											?major=identifier
+											<?php if ($major == 'identifier' && $dir =='ASC') echo '&dir=DESC'; else echo '&dir=ASC' ?>">
+			<?php echo $this->translate('Identifier');?></strong></td>
+		<td align="center"><strong><a href="<?php echo $this->url('deploymentWithdrawal/index', array('id' => $deployment->id)) ?>
+											?major=status
+											<?php if ($major == 'status' && $dir =='ASC') echo '&dir=DESC'; else echo '&dir=ASC' ?>">
+			<?php echo $this->translate('Status');?></strong></td>
+		<td align="center"><strong><a href="<?php echo $this->url('deploymentWithdrawal/index', array('id' => $deployment->id)) ?>
+											?major=withdrawal_date
+											<?php if ($major == 'withdrawal_date' && $dir =='ASC') echo '&dir=DESC'; else echo '&dir=ASC' ?>">
+			<?php echo $this->translate('withdrawal date');?></strong></td>
+		<td align="center"><strong><a href="<?php echo $this->url('deploymentWithdrawal/index', array('id' => $deployment->id)) ?>
+											?major=provisional_date
+											<?php if ($major == 'provisional_date' && $dir =='ASC') echo '&dir=DESC'; else echo '&dir=ASC' ?>">
+			<?php echo $this->translate('Provisional date');?></strong></td>
+		<td align="center"><strong><a href="<?php echo $this->url('deploymentWithdrawal/index', array('id' => $deployment->id)) ?>
+											?major=actual_date
+											<?php if ($major == 'actual_date' && $dir =='ASC') echo '&dir=DESC'; else echo '&dir=ASC' ?>">
+			<?php echo $this->translate('Actual date');?></strong></td>
+
+
+	</tr>
+
+
+<?php foreach ($deploymenWithdrawals as $deploymenWithdrawal) : ?>
+
+	<tr class="<?php echo $this->cycle(array("even", "odd"))->next();?>">
+	<?php
+		$element = $form->get('product'.$deploymenWithdrawal->id);
+	?>
+        <td><?php echo $this->formElement($element) ?></td>
+        <td><a href="<?php echo $this->url('deploymentWithdrawal/detail', array('id' => $deploymenWithdrawal->id));?>"><img height="12" src="/images/zoom_plus_plain.png" alt="<?php echo $this->translate('detail') ?>" /></a></td>
+		
+        <td align="center"><?php echo $deploymenWithdrawal->caption ?></td>
+		<td align="center"><?php echo $deploymenWithdrawal->identifier ?></td>
+		<td align="center"><?php echo $deploymenWithdrawal->status ?></td>
+		<td align="center"><?php echo $deploymenWithdrawal->withdrawal_date ?></td>
+		<td align="center"><?php echo $deploymenWithdrawal->provisional_date ?></td>
+		<td align="center"><?php echo $deploymenWithdrawal->actual_date ?></td>
+
+
+		</tr>
+<?php endforeach; ?>
+
+	<!--  Check all  -->
+	<tr class="<?php echo $this->cycle(array("even", "odd"))->next();?>">
+		<td colspan="13">
+			<?php echo $this->formElement($form->get('check_all')) ?>&nbsp;&nbsp;
+			<?php echo $this->translate('Select all') ?>
+		</td>
+	</tr>
+	
+	<!--  Batch update : withdrawal_date -->
+	<tr class="<?php echo $this->cycle(array("even", "odd"))->next();?>">
+	<?php
+		$element = $form->get('update_withdrawal_date');
+		$element->setAttribute('class', 'btn btn-primary');
+	?>
+		<td colspan="5" align="right">
+			<?php echo $this->formElement($element) ?>
+		</td>
+	<?php
+		$element = $form->get('withdrawal_date');
+	?>
+		<td colspan="9" align="left">
+			<?php echo $this->formElement($element) ?>
+		</td>
+	</tr>
+	
+	<!--  Batch update : provisional_date -->
+	<tr class="<?php echo $this->cycle(array("even", "odd"))->next();?>">
+	<?php
+		$element = $form->get('update_provisional_date');
+		$element->setAttribute('class', 'btn btn-primary');
+	?>
+		<td colspan="5" align="right">
+			<?php echo $this->formElement($element) ?>
+		</td>
+	<?php
+		$element = $form->get('provisional_date');
+	?>
+		<td colspan="9" align="left">
+			<?php echo $this->formElement($element) ?>
+		</td>
+	</tr>
+	
+	<!--  Batch update : actual_date -->
+	<tr class="<?php echo $this->cycle(array("even", "odd"))->next();?>">
+	<?php
+		$element = $form->get('update_actual_date');
+		$element->setAttribute('class', 'btn btn-primary');
+	?>
+		<td colspan="5" align="right">
+			<?php echo $this->formElement($element) ?>
+		</td>
+	<?php
+		$element = $form->get('actual_date');
+	?>
+		<td colspan="9" align="left">
+			<?php echo $this->formElement($element) ?>
+		</td>
+	</tr>
+	
+	<!--  Batch update : status -->
+		<tr class="<?php echo $this->cycle(array("even", "odd"))->next();?>">
+	<?php
+		$element = $form->get('update_status');
+		$element->setAttribute('class', 'btn btn-primary');
+	?>
+		<td colspan="5" align="right">
+			<?php echo $this->formElement($element) ?>
+		</td>
+	<?php
+		$element = $form->get('status');
+	?>
+		<td colspan="9" align="left">
+			<?php echo $this->formElement($element) ?>
+		</td>
+	</tr>
+
+</table>
+
+<?php echo $this->form()->closeTag();?>
+
+<script>
+function checkAll() {
+<?php foreach ($deploymenWithdrawals as $deploymenWithdrawal) :?>
+	if (document.getElementById("check_all").checked) {
+		document.getElementById("product<?php echo $deploymenWithdrawal->id ?>").checked = true;
+	}
+	else {
+		document.getElementById("product<?php echo $deploymenWithdrawal->id ?>").checked = false;
+	}
+<?php endforeach;?>
+}
+</script>
+
+
+
+
+
+<!--   Date picker script   -->
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/smoothness/jquery-ui.css" />
+  <script>
+  
+  
+  $.datepicker.regional['fr'] = {
+    closeText: 'Fermer',
+    prevText: 'Précédent',
+    nextText: 'Suivant',
+    currentText: 'Aujourd\'hui',
+    monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+    monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
+    dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+    dayNamesShort: ['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.'],
+    dayNamesMin: ['D','L','M','M','J','V','S'],
+    weekHeader: 'Sem.',
+	dateFormat: 'yy-mm-dd',
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix: ''
+};
+$.datepicker.setDefaults($.datepicker.regional['fr']);
+  
+  
+  
+  
+//  connection_date est l'id de  champ (connection date)
+
+jQuery(document).ready(function($){
+    $("#withdrawal_date").datepicker();
+});
+
+//availability_date est l'id de  champ (availability date)
+jQuery(document).ready(function($){
+    $("#actual_date").datepicker();
+});
+
+//availability_date est l'id de  champ (provisional date)
+jQuery(document).ready(function($){
+    $("#provisional_date").datepicker();
+});
+  </script>
+
+
+
+
+

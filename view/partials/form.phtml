@@ -1,0 +1,34 @@
+<?php
+	$form = $this->form;
+	$form->setAttribute('action', $this->url($route, array('action' => $this->action, 'id' => $this->id)));
+	$form->prepare();
+	echo $this->form()->openTag($form);
+?>
+<div class="col-sm-12">&nbsp;</div>
+<?php foreach ($form as $element) : ?>
+    <div class="form-group" <?php if ($this->formElementErrors($element)) echo "has-error" ?>">
+        <?php if ('submit' != $element->getAttribute('type')) : ?>
+        	<?php
+            echo '<label class="col-sm-2 control-label">'.$element->getLabel().'</label>';
+            $element->setAttribute('class', 'form-control');
+//                    ->setAttribute('placeholder', $element->getLabel());
+                    echo '<div class="col-sm-4">'.$this->formElement($element).'</div>';
+            if ($this->formElementErrors($element)) {
+                echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<p class="help-block">')
+                    ->setMessageSeparatorString('</p><p class="help-block">')
+                    ->setMessageCloseString('</p>')
+                    ->render($element);
+            } ?>
+        <?php else : ?>
+        	<?php $element->setAttribute('class', 'btn btn-success')?>
+            <div class="col-sm-2">&nbsp;</div>
+            <div class="col-sm-4"><?php echo $this->formElement($element)?>
+			<a href="<?php echo $this->url('commande', array('action' => 'index'))?>">&nbsp;&nbsp;
+				<?php echo $this->translate('Annuler')?></a><br><br></div>
+		<?php endif ?>
+    </div>
+ 
+<?php endforeach;
+echo $this->form()->closeTag();
+?>

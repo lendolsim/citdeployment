@@ -1,0 +1,175 @@
+<?php
+    echo $this->partial('/partials/menu');
+?>
+<?php
+$title = 'Commande';  
+$form = $this->form;
+?>
+<h1><?php echo $this->translate($title); ?></h1>
+
+<table>
+	<tr class="<?php echo $this->cycle(array("even", "odd"))->next();?>">
+		<td colspan="14">
+			<a href="<?php echo $this->url('deployment');?>"><?php echo $this->translate('Return to deployments') ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+		</td>
+	</tr>
+
+<tr>
+<td><h4><?php echo $this->translate('Identifier')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->identifier);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Site')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($site->caption);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Responsible')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($responsible->n_fn);?></td>
+</tr>
+<tr>
+<tr>
+<td><h4><?php echo $this->translate('Approver')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($responsible2->n_fn);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Caption')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->caption);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('People')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->nb_people);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Surface')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->surface);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Floors')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->nb_floors);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Retraction date')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->retraction_date);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Initial hoped delivery date')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->initial_hoped_delivery_date);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Current hoped delivery date')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->current_hoped_delivery_date);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Management date')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->management_date);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Expected delivery date')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->expected_delivery_date);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Actual delivery date')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->actual_delivery_date);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Finalized order date')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->finalized_order_date);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Description')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->description);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Comment')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->comment);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Availability date')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->availability_date);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Provisional date')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->provisional_date);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Connection date')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->connection_date);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Deployment Status')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($order->deployment_Status);?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Price')."&nbsp;"."&nbsp;";?></h4></td>
+<td><?php echo $this->escapeHtml($sum)."&nbsp;"."€";?></td>
+</tr>
+<tr>
+<td><h4><?php echo $this->translate('Equipements')."&nbsp;"."&nbsp;";?></h4></td>
+<td align="center"><a href="<?php echo $this->url('deploymentProduct/index', array('id' => $order->id));?>"><?php echo $this->translate('Rows') ?></a></td>
+</tr>
+<tr>
+<td><h4><?php echo "Retraits"."&nbsp;"."&nbsp;";?></h4></td>
+<td align="center"><a href="<?php echo $this->url('deploymentWithdrawal/index', array('id' => $order->id));?>"><?php echo $this->translate('Withdrawals') ?></a></td>
+</tr>
+</table>
+
+
+
+
+<?php
+    echo $this->partial('/partials/generic-form', array('route' => 'deployment/update', 'form' => $this->form, 'id' => $id, 'returnUrl' => $this->url('deployment')));
+?>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/smoothness/jquery-ui.css" />
+  <script>
+  
+  
+  $.datepicker.regional['fr'] = {
+    closeText: 'Fermer',
+    prevText: 'Précédent',
+    nextText: 'Suivant',
+    currentText: 'Aujourd\'hui',
+    monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+    monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
+    dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+    dayNamesShort: ['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.'],
+    dayNamesMin: ['D','L','M','M','J','V','S'],
+    weekHeader: 'Sem.',
+	dateFormat: 'yy-mm-dd',
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix: ''
+};
+$.datepicker.setDefaults($.datepicker.regional['fr']);
+  
+  
+  
+  
+//  connection_date est l'id de  champ (connection date)
+
+jQuery(document).ready(function($){
+    $("#connection_date").datepicker();
+});
+
+//availability_date est l'id de  champ (availability date)
+jQuery(document).ready(function($){
+    $("#availability_date").datepicker();
+});
+
+//availability_date est l'id de  champ (provisional date)
+jQuery(document).ready(function($){
+    $("#provisional_date").datepicker();
+});
+  </script>
+
